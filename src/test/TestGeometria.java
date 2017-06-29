@@ -13,6 +13,11 @@ import main.Triangulo;
 
 public class TestGeometria {
 	
+	private static final int RTRIANGULO = 0;
+	private static final int ETRIANGULO = 1;
+	private static final int ELIPSE = 2; 
+
+
 	//@Test
 	public void testAdd(){
 		ListGeometria listGeo = new ListGeometria();		
@@ -57,44 +62,35 @@ public class TestGeometria {
 	
 	
 	
-	//@Test
+	@Test
 	public void testRemove(){
 				
 		//Expected
 		Geometria[] expecteds = new Geometria[3]; 		
-		expecteds[0] = new RTriangulo(4, 3);
-		expecteds[1] = new ETriangulo(15);
+		expecteds[RTRIANGULO] = new RTriangulo(4, 3);
+		expecteds[ETRIANGULO] = new ETriangulo(15);
 		//Elimine el 2
 		//expected[2] = new Circulo(2);
-		expecteds[2] = new Elipse(2,4);
+		expecteds[ELIPSE] = new Elipse(2,4);
 						
 		//agregar valores
 		ListGeometria listGeo = new ListGeometria();		
-		listGeo.add(expecteds[0]);
-		listGeo.add(expecteds[1]);
+		listGeo.add(expecteds[RTRIANGULO]);
+		listGeo.add(expecteds[ETRIANGULO]);
 		//Envio el elemento a eliminar que seria el #2
 		listGeo.add(new Circulo(2));
-		listGeo.add(expecteds[2]);
+		listGeo.add(expecteds[ELIPSE]);
 		
 		listGeo.remove(listGeo.get(2));
-		
 		Assert.assertEquals(3, listGeo.size());
-		//busco los valores actuales
-		Geometria[] actuals = new Geometria[listGeo.size()];
-		for(int i=0; i<listGeo.size(); i++){
-			actuals[i] = listGeo.get(i);
-		}
 		
 		Assert.assertEquals(RTriangulo.class, listGeo.get(0).getClass());
-		
-		Assert.assertEquals(6, listGeo.get(0).getArea(),0.1);
-		Assert.assertEquals(12, listGeo.get(0).getPerimetro(),0.1);
-				
-		Assert.assertArrayEquals(expecteds, actuals);			
+		Assert.assertEquals(ETriangulo.class, listGeo.get(1).getClass());
+		Assert.assertEquals(Elipse.class, listGeo.get(2).getClass());		
 	}
 	
 	
-	@Test
+	//@Test
 	public void testGet() {
 
 		// Expected
